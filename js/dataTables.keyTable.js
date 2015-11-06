@@ -1,11 +1,11 @@
-/*! KeyTable 2.0.0
+/*! KeyTable 2.1.0-dev
  * ©2009-2015 SpryMedia Ltd - datatables.net/license
  */
 
 /**
  * @summary     KeyTable
  * @description Spreadsheet like keyboard navigation for DataTables
- * @version     2.0.0
+ * @version     2.1.0-dev
  * @file        dataTables.keyTable.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
@@ -21,13 +21,27 @@
  * For details please refer to: http://www.datatables.net
  */
 
+(function( factory ){
+	if ( typeof define === 'function' && define.amd ) {
+		// AMD
+		define( ['jquery', 'datatables.net'], factory );
+	}
+	else if ( typeof exports === 'object' ) {
+		// CommonJS
+		module.exports = function ($) {
+			if ( ! $ ) { $ = require('jquery'); }
+			if ( ! $.fn.dataTable ) { require('datatables.net')($); }
 
-(function(window, document, undefined) {
-
-
-var factory = function( $, DataTable ) {
-"use strict";
-
+			factory( $ );
+		};
+	}
+	else {
+		// Browser
+		factory( jQuery );
+	}
+}(function( $ ) {
+'use strict';
+var DataTable = $.fn.dataTable;
 
 
 var KeyTable = function ( dt, opts ) {
@@ -68,7 +82,7 @@ var KeyTable = function ( dt, opts ) {
 };
 
 
-KeyTable.prototype = {
+$.extend( KeyTable.prototype, {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * API methods for DataTables API interface
 	 */
@@ -99,6 +113,23 @@ KeyTable.prototype = {
 	focus: function ( row, column )
 	{
 		this._focus( this.s.dt.cell( row, column ) );
+	},
+
+	/**
+	 * Is the cell focused
+	 * @param  {object} cell Cell index to check
+	 * @returns {boolean} true if focused, false otherwise
+	 */
+	focused: function ( cell )
+	{
+		var lastFocus = this.s.lastFocus;
+
+		if ( ! lastFocus ) {
+			return false;
+		}
+
+		var lastIdx = this.s.lastFocus.index();
+		return cell.row === lastIdx.row && cell.column === lastIdx.column;
 	},
 
 
@@ -346,7 +377,7 @@ KeyTable.prototype = {
 
 		// Is the row on the current page? If not, we need to redraw to show the
 		// page
-		if ( row < pageInfo.start || row >= pageInfo.start+pageInfo.length ) {
+		if ( pageInfo.length !== -1 && (row < pageInfo.start || row >= pageInfo.start+pageInfo.length) ) {
 			dt
 				.one( 'draw', function () {
 					that._focus( row, column );
@@ -368,7 +399,7 @@ KeyTable.prototype = {
 			row -= pageInfo.start;
 		}
 
-		var cell = dt.cell( ':eq('+row+')', column );
+		var cell = dt.cell( ':eq('+row+')', column, {search: 'applied'} );
 
 		if ( lastFocus ) {
 			// Don't trigger a refocus on the same cell
@@ -610,8 +641,7 @@ KeyTable.prototype = {
 			row++;
 		}
 
-		if ( row    >= 0 && row    < rows &&
-			 column >= 0 && column <= columns.length
+		if ( row >= 0 && row < rows && $.inArray( column, columns ) !== -1
 		) {
 			e.preventDefault();
 
@@ -659,7 +689,7 @@ KeyTable.prototype = {
 			that._focus( dt.cell(':eq(0)', {page: 'current'}) );
 		} );
 	}
-};
+} );
 
 
 /**
@@ -717,7 +747,7 @@ KeyTable.defaults = {
 
 
 
-KeyTable.version = "2.0.0";
+KeyTable.version = "2.1.0-dev";
 
 
 $.fn.dataTable.KeyTable = KeyTable;
@@ -756,6 +786,27 @@ DataTable.Api.register( 'keys.enable()', function ( opts ) {
 	} );
 } );
 
+// Cell selector
+DataTable.ext.selector.cell.push( function ( settings, opts, cells ) {
+	var focused = opts.focused;
+	var kt = settings.keytable;
+	var out = [];
+
+	if ( ! kt || focused === undefined ) {
+		return cells;
+	}
+
+	for ( var i=0, ien=cells.length ; i<ien ; i++ ) {
+		if ( (focused === true &&  kt.focused( cells[i] ) ) ||
+			 (focused === false && ! kt.focused( cells[i] ) )
+		) {
+			out.push( cells[i] );
+		}
+	}
+
+	return out;
+} );
+
 
 // Attach a listener to the document which listens for DataTables initialisation
 // events so we can automatically initialise
@@ -778,21 +829,4 @@ $(document).on( 'preInit.dt.dtk', function (e, settings, json) {
 
 
 return KeyTable;
-}; // /factory
-
-
-// Define as an AMD module if possible
-if ( typeof define === 'function' && define.amd ) {
-	define( ['jquery', 'datatables'], factory );
-}
-else if ( typeof exports === 'object' ) {
-    // Node/CommonJS
-    factory( require('jquery'), require('datatables') );
-}
-else if ( jQuery && !jQuery.fn.dataTable.KeyTable ) {
-	// Otherwise simply initialise as normal, stopping multiple evaluation
-	factory( jQuery, jQuery.fn.dataTable );
-}
-
-
-})(window, document);
+}));
