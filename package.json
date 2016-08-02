@@ -1,6 +1,6 @@
 {
     "name": "datatables.net-keytable",
-    "version": "2.1.2",
+    "version": "2.1.3",
     "description": "KeyTable for DataTables ",
     "files": [
         "js/dataTables.keyTable.js"
