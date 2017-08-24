@@ -226,6 +226,8 @@ $.extend( KeyTable.prototype, {
 		}
 
 		if ( this.c.editor ) {
+			var editor = this.c.editor;
+
 			// Need to disable KeyTable when the main editor is shown
 			editor.on( 'open.keyTableMain', function (e, mode, action) {
 				if ( mode !== 'inline' && that.s.enable ) {
@@ -442,7 +444,7 @@ $.extend( KeyTable.prototype, {
 
 				// Excel style - select all text
 				if ( that.c.editAutoSelect ) {
-					$('div.DTE_Field_InputControl input, div.DTE_Field_InputControl textarea').select();
+					$('div.DTE input, div.DTE textarea').select();
 				}
 
 				// Reduce the keys the Keys listens for
