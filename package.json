@@ -1,6 +1,6 @@
 {
     "name": "datatables.net-keytable",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "description": "KeyTable for DataTables ",
     "files": [
         "js/dataTables.keyTable.js"
@@ -24,7 +24,7 @@
     },
     "dependencies": {
         "jquery": ">=1.7",
-        "datatables.net": ">=1.10.9"
+        "datatables.net": "^1.10.15"
     },
     "repository": {
         "type": "git",
