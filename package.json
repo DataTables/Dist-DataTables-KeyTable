@@ -3,7 +3,7 @@
     "version": "2.3.1",
     "description": "KeyTable for DataTables ",
     "files": [
-        "js/dataTables.keyTable.js"
+        "js/**/*.js"
     ],
     "main": "./js/dataTables.keyTable.js",
     "keywords": [
