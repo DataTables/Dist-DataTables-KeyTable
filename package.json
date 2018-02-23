@@ -5,7 +5,7 @@
     "files": [
         "js/**/*.js"
     ],
-    "main": "./js/dataTables.keyTable.js",
+    "main": "js/dataTables.keyTable.js",
     "keywords": [
         "spreadsheet",
         "excel",
