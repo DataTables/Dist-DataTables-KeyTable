@@ -314,18 +314,11 @@ $.extend( KeyTable.prototype, {
 		}
 
 		dt.on( 'destroy'+namespace, function () {
-			that._blur( true );
-
-			// Event tidy up
 			dt.off( namespace );
-
-			$( dt.table().body() )
-				.off( 'click'+namespace, 'th, td' )
-				.off( 'dblclick'+namespace, 'th, td' );
-
+			$( dt.table().body() ).off( 'click'+namespace, 'th, td' );
 			$( document )
-				.off( 'mousedown'+namespace )
 				.off( 'keydown'+namespace )
+				.off( 'click'+namespace )
 				.off( 'copy'+namespace )
 				.off( 'paste'+namespace );
 		} );
@@ -357,10 +350,9 @@ $.extend( KeyTable.prototype, {
 	/**
 	 * Blur the control
 	 *
-	 * @param {boolean} [noEvents=false] Don't trigger updates / events (for destroying)
 	 * @private
 	 */
-	_blur: function (noEvents)
+	_blur: function ()
 	{
 		if ( ! this.s.enable || ! this.s.lastFocus ) {
 			return;
@@ -371,11 +363,9 @@ $.extend( KeyTable.prototype, {
 		$( cell.node() ).removeClass( this.c.className );
 		this.s.lastFocus = null;
 
-		if ( ! noEvents ) {
-			this._updateFixedColumns(cell.index().column);
+		this._updateFixedColumns(cell.index().column);
 
-			this._emitEvent( 'key-blur', [ this.s.dt, cell ] );
-		}
+		this._emitEvent( 'key-blur', [ this.s.dt, cell ] );
 	},
 
 
@@ -525,8 +515,8 @@ $.extend( KeyTable.prototype, {
 					dt.keys.enable( hardEdit ? 'tab-only' : 'navigation-only' );
 
 					// On blur of the navigation submit
-					dt.on( 'key-blur.editor', function (e, dt, cell) {
-						if ( editor.displayed() && cell.node() === editCell.node() ) {
+					dt.on( 'key-blur.editor', function () {
+						if ( editor.displayed() ) {
 							editor.submit();
 						}
 					} );
@@ -535,13 +525,6 @@ $.extend( KeyTable.prototype, {
 					if ( hardEdit ) {
 						$( dt.table().container() ).addClass('dtk-focus-alt');
 					}
-
-					// If the dev cancels the submit, we need to return focus
-					editor.on( 'preSubmitCancelled'+namespace, function () {
-						setTimeout( function () {
-							that._focus( editCell, null, false );
-						}, 50 );
-					} );
 
 					editor.on( 'submitUnsuccessful'+namespace, function () {
 						that._focus( editCell, null, false );
@@ -693,9 +676,6 @@ $.extend( KeyTable.prototype, {
 			this._blur();
 		}
 
-		// Clear focus from other tables
-		this._removeOtherFocus();
-
 		var node = $( cell.node() );
 		node.addClass( this.c.className );
 
@@ -756,12 +736,6 @@ $.extend( KeyTable.prototype, {
 		// If not focused, then there is no key action to take
 		var lastFocus = this.s.lastFocus;
 		if ( ! lastFocus ) {
-			return;
-		}
-
-		// And the last focus still exists!
-		if ( ! this.s.dt.cell(lastFocus.node).any() ) {
-			this.s.lastFocus = null;
 			return;
 		}
 
@@ -843,19 +817,6 @@ $.extend( KeyTable.prototype, {
 		}
 	},
 
-	/**
-	 * Remove focus from all tables other than this one
-	 */
-	_removeOtherFocus: function ()
-	{
-		var thisTable = this.s.dt.table().node();
-
-		$.fn.dataTable.tables({api:true}).iterator('table', function (settings) {
-			if (this.table().node() !== thisTable) {
-				this.cell.blur();
-			}
-		});
-	},
 
 	/**
 	 * Scroll a container to make a cell visible in it. This can be used for
