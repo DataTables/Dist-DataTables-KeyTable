@@ -524,7 +524,7 @@ $.extend( KeyTable.prototype, {
 		}
 
 		// DataTables draw event
-		if (orig.type === 'draw') {
+		if (orig && orig.type === 'draw') {
 			return;
 		}
 
@@ -551,12 +551,14 @@ $.extend( KeyTable.prototype, {
 			return;
 		}
 
-		orig.stopPropagation();
+		if ( orig ) {
+			orig.stopPropagation();
 
-		// Return key should do nothing - for textareas it would empty the
-		// contents
-		if ( key === 13 ) {
-			orig.preventDefault();
+			// Return key should do nothing - for textareas it would empty the
+			// contents
+			if ( key === 13 ) {
+				orig.preventDefault();
+			}
 		}
 
 		var editInline = function () {
@@ -1247,7 +1249,7 @@ DataTable.Api.register( 'keys.enable()', function ( opts ) {
 } );
 
 DataTable.Api.register( 'keys.enabled()', function ( opts ) {
-	var ctx = this.context;
+	let ctx = this.context;
 
 	if (ctx.length) {
 		return ctx[0].keytable
