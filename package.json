@@ -1,37 +1,45 @@
 {
     "name": "datatables.net-keytable",
+    "description": "KeyTable for DataTables",
+    "main": "js/dataTables.keyTable.js",
     "version": "2.6.1",
-    "description": "KeyTable for DataTables ",
     "files": [
         "js/**/*.js"
     ],
-    "main": "js/dataTables.keyTable.js",
-    "type": "types.d.ts",
     "keywords": [
-        "spreadsheet",
-        "excel",
-        "keyboard",
-        "DataTables",
+        "KeyTable",
+ "Excel",
+ "keyboard",
+ "Spreadsheet",
+        "Datatables",
         "jQuery",
         "table",
-        "DataTables"
+        "filter",
+        "sort"
     ],
-    "homepage": "https://datatables.net",
-    "bugs": "https://datatables.net/forums",
-    "license": "MIT",
+    "dependencies": {
+        "datatables.net": ">=1.10.24",
+        "jquery": ">=1.7"
+    },
+    "moduleType": [
+        "globals",
+        "amd",
+        "node"
+    ],
+    "ignore": [
+        "composer.json",
+        "datatables.json",
+        "package.json"
+    ],
     "author": {
         "name": "SpryMedia Ltd",
         "url": "http://datatables.net"
     },
-    "dependencies": {
-        "jquery": ">=1.7",
-        "datatables.net": "^1.10.15"
-    },
+    "homepage": "https://datatables.net",
+    "bugs": "https://datatables.net/forums",
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/DataTables/Dist-DataTables-KeyTable.git"
-    },
-    "devDependencies": {
-        "@types/jquery": "^3.5.1"
     }
 }

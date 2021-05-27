@@ -1,6 +1,6 @@
 # KeyTable for DataTables 
 
-This package contains distribution files for the [KeyTable extension](https://datatables.net/extensions/keytable) for [DataTables](https://datatables.net/). Only the core software for this library is contained in this package - to be correctly styled, a styling package for KeyTable must also be included. Styling options include DataTable's native styling, [Bootstrap](http://getbootstrap.com) and [Foundation](http://foundation.zurb.com/).
+This package contains distribution files for the [KeyTable extension](https://datatables.net/extensions/KeyTable) for [DataTables](https://datatables.net/). Only the core software for this library is contained in this package - to be correctly styled, a styling package for KeyTable must also be included. Styling options include DataTable's native styling, [Bootstrap](http://getbootstrap.com) and [Foundation](http://foundation.zurb.com/).
 
 KeyTable allows you to use keyboard navigation on a DataTables enhanced table, like an Excel spreadsheet - a cell shows a focus outline which can be moved using the keyboard or mouse operations. This can be particularly useful in an editable table that uses Editor allowing end users to update data very quickly.
 
@@ -32,8 +32,7 @@ bower install --save datatables.net-keytable
 
 ## Documentation
 
-Full documentation of the DataTables options, API and plug-in interface are available on the DOCS_LINK. The site also contains information on the wide variety of plug-ins that are available for DataTables, which can be used to enhance and customise your table even further.
-
+Full documentation and examples for KeyTable can be found [on the website](https://datatables.net/extensions/keytable).
 
 ## Bug / Support
 
