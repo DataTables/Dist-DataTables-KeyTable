@@ -3,10 +3,10 @@
     "description": "KeyTable for DataTables",
     "main": "js/dataTables.keyTable.js",
     "types": "./types/types.d.ts",
-    "version": "2.6.3",
+    "version": "2.6.4",
     "files": [
         "js/**/*.js",
-     "types/**/*.d.ts"
+        "types/**/*.d.ts"
     ],
     "keywords": [
         "KeyTable",
@@ -20,7 +20,7 @@
         "sort"
     ],
     "dependencies": {
-        "datatables.net": ">=1.10.25",
+        "datatables.net": ">=1.11.3",
         "jquery": ">=1.7"
     },
     "moduleType": [
