@@ -10,9 +10,9 @@
     ],
     "keywords": [
         "KeyTable",
-        "Excel",
-        "keyboard",
-        "Spreadsheet",
+ "Excel",
+ "keyboard",
+ "Spreadsheet",
         "Datatables",
         "jQuery",
         "table",
@@ -20,7 +20,7 @@
         "sort"
     ],
     "dependencies": {
-        "datatables.net": ">=1.11.3",
+        "datatables.net": ">=1.11.5",
         "jquery": ">=1.7"
     },
     "moduleType": [
