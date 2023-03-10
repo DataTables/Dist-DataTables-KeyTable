@@ -1,5 +1,5 @@
-/*! KeyTable 2.8.0
- * ©2009-2022 SpryMedia Ltd - datatables.net/license
+/*! KeyTable 2.8.2
+ * © SpryMedia Ltd - datatables.net/license
  */
 
 (function( factory ){
@@ -11,25 +11,33 @@
 	}
 	else if ( typeof exports === 'object' ) {
 		// CommonJS
-		module.exports = function (root, $) {
-			if ( ! root ) {
-				// CommonJS environments without a window global must pass a
-				// root. This will give an error otherwise
-				root = window;
-			}
-
-			if ( ! $ ) {
-				$ = typeof window !== 'undefined' ? // jQuery's factory checks for a global window
-					require('jquery') :
-					require('jquery')( root );
-			}
-
+		var jq = require('jquery');
+		var cjsRequires = function (root, $) {
 			if ( ! $.fn.dataTable ) {
 				require('datatables.net')(root, $);
 			}
-
-			return factory( $, root, root.document );
 		};
+
+		if (typeof window !== 'undefined') {
+			module.exports = function (root, $) {
+				if ( ! root ) {
+					// CommonJS environments without a window global must pass a
+					// root. This will give an error otherwise
+					root = window;
+				}
+
+				if ( ! $ ) {
+					$ = jq( root );
+				}
+
+				cjsRequires( root, $ );
+				return factory( $, root, root.document );
+			};
+		}
+		else {
+			cjsRequires( window, jq );
+			module.exports = factory( jq, window, window.document );
+		}
 	}
 	else {
 		// Browser
@@ -44,11 +52,11 @@ var DataTable = $.fn.dataTable;
 /**
  * @summary     KeyTable
  * @description Spreadsheet like keyboard navigation for DataTables
- * @version     2.8.0
+ * @version     2.8.2
  * @file        dataTables.keyTable.js
  * @author      SpryMedia Ltd
  * @contact     datatables.net
- * @copyright   Copyright 2009-2022 SpryMedia Ltd.
+ * @copyright   Copyright SpryMedia Ltd.
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license/mit
@@ -1306,7 +1314,7 @@ KeyTable.defaults = {
 
 
 
-KeyTable.version = "2.8.0";
+KeyTable.version = "2.8.2";
 
 
 $.fn.dataTable.KeyTable = KeyTable;

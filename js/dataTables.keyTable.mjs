@@ -1,20 +1,19 @@
-/*! KeyTable 2.8.0
- * ©2009-2022 SpryMedia Ltd - datatables.net/license
+/*! KeyTable 2.8.2
+ * © SpryMedia Ltd - datatables.net/license
  */
 
 import $ from 'jquery';
 import DataTable from 'datatables.net';
 
 
-
 /**
  * @summary     KeyTable
  * @description Spreadsheet like keyboard navigation for DataTables
- * @version     2.8.0
+ * @version     2.8.2
  * @file        dataTables.keyTable.js
  * @author      SpryMedia Ltd
  * @contact     datatables.net
- * @copyright   Copyright 2009-2022 SpryMedia Ltd.
+ * @copyright   Copyright SpryMedia Ltd.
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license/mit
@@ -1272,7 +1271,7 @@ KeyTable.defaults = {
 
 
 
-KeyTable.version = "2.8.0";
+KeyTable.version = "2.8.2";
 
 
 $.fn.dataTable.KeyTable = KeyTable;
