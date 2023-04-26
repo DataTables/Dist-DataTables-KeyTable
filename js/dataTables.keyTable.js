@@ -1,4 +1,4 @@
-/*! KeyTable 2.8.2
+/*! KeyTable 2.9.0-dev
  * © SpryMedia Ltd - datatables.net/license
  */
 
@@ -52,7 +52,7 @@ var DataTable = $.fn.dataTable;
 /**
  * @summary     KeyTable
  * @description Spreadsheet like keyboard navigation for DataTables
- * @version     2.8.2
+ * @version     2.9.0-dev
  * @file        dataTables.keyTable.js
  * @author      SpryMedia Ltd
  * @contact     datatables.net
@@ -699,8 +699,8 @@ $.extend( KeyTable.prototype, {
 	 */
 	_emitEvent: function ( name, args )
 	{
-		this.s.dt.iterator( 'table', function ( ctx, i ) {
-			$(ctx.nTable).triggerHandler( name, args );
+		return this.s.dt.iterator( 'table', function ( ctx, i ) {
+			return $(ctx.nTable).triggerHandler( name, args );
 		} );
 	},
 
@@ -792,6 +792,12 @@ $.extend( KeyTable.prototype, {
 		// not have been rendered (therefore can't use `:eq()` selector).
 		var cells = dt.cells( null, column, {search: 'applied', order: 'applied'} ).flatten();
 		var cell = dt.cell( cells[ row ] );
+
+		// Prefocus check - this event allows a focus action to be disallowed. 
+		var preFocus = this._emitEvent( 'key-prefocus', [ this.s.dt, cell, originalEvent || null ] );
+		if (preFocus.indexOf(false) !== -1) {
+			return;
+		}
 
 		if ( lastFocus ) {
 			// Don't trigger a refocus on the same cell
@@ -1319,7 +1325,7 @@ KeyTable.defaults = {
 
 
 
-KeyTable.version = "2.8.2";
+KeyTable.version = "2.9.0-dev";
 
 
 $.fn.dataTable.KeyTable = KeyTable;
