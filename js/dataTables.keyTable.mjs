@@ -181,7 +181,7 @@ $.extend(KeyTable.prototype, {
 		if (this.c.blurable) {
 			$(document).on('mousedown' + namespace, function (e) {
 				// Click on the search input will blur focus
-				if ($(e.target).parents('.dataTables_filter').length) {
+				if ($(e.target).parents('.dataTables_filter, .dt-search').length) {
 					that._blur();
 				}
 
@@ -1026,7 +1026,6 @@ $.extend(KeyTable.prototype, {
 	 * @private
 	 */
 	_shift: function (e, direction, keyBlurable) {
-		var that = this;
 		var dt = this.s.dt;
 		var pageInfo = dt.page.info();
 		var rows = pageInfo.recordsDisplay;
