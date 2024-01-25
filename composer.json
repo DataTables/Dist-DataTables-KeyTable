@@ -1,5 +1,4 @@
 {
-    "version": "2.7.0",
     "name": "datatables.net/datatables.net-keytable",
     "description": "KeyTable allows you to use keyboard navigation on a DataTables enhanced table, like an Excel spreadsheet - a cell shows a focus outline which can be moved using the keyboard or mouse operations. This can be particularly useful in an editable table that uses Editor allowing end users to update data very quickly. This is KeyTable for DataTables",
     "support": {
@@ -20,9 +19,9 @@
     "minimum-stability": "dev",
     "keywords": [
         "KeyTable",
- "Excel",
- "keyboard",
- "Spreadsheet",
+        "Excel",
+        "keyboard",
+        "Spreadsheet",
         "Datatables",
         "jQuery",
         "table"
