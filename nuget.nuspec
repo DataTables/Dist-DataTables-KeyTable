@@ -10,7 +10,7 @@
         <license type="expression">MIT</license>
         <tags>KeyTable  Excel  keyboard  Spreadsheet  Datatables jQuery table</tags>
         <dependencies>
-            <dependency id="datatables.net" version="1.12.1"/>
+            <dependency id="datatables.net" version="2.3.2"/>
         </dependencies>
         <contentFiles>
             <files include="**/*" buildAction="Content"/>
@@ -21,6 +21,10 @@
         <file src="js/dataTables.keyTable.js" target="contentFiles\any\any\wwwroot\js"/>
         <file src="js/dataTables.keyTable.min.js" target="content\Scripts"/>
         <file src="js/dataTables.keyTable.min.js" target="contentFiles\any\any\wwwroot\js"/>
+        <file src="js/dataTables.keyTable.min.mjs" target="content\Scripts"/>
+        <file src="js/dataTables.keyTable.min.mjs" target="contentFiles\any\any\wwwroot\js"/>
+        <file src="js/dataTables.keyTable.mjs" target="content\Scripts"/>
+        <file src="js/dataTables.keyTable.mjs" target="contentFiles\any\any\wwwroot\js"/>
     </files>
 </package>
 
