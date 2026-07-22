@@ -1,4 +1,4 @@
-/*! KeyTable 3.0.0-beta.1 for DataTables
+/*! KeyTable 3.0.0 for DataTables
  * Copyright (c) SpryMedia Ltd - datatables.net/license
  */
 
@@ -1050,7 +1050,7 @@ KeyTable.defaults = {
      */
     tabIndex: null
 };
-KeyTable.version = '3.0.0-beta.1';
+KeyTable.version = '3.0.0';
 
 
 DataTable.KeyTable = KeyTable;
