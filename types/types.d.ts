@@ -136,7 +136,7 @@ declare class KeyTable {
 }
 
 declare module 'datatables.net' {
-    interface Config {
+    interface Options {
         /**
          * KeyTable extension options
          */
