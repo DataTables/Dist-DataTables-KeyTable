@@ -45,8 +45,8 @@ var Dom = DataTable.Dom;
 var util = DataTable.util;
 
 // Sanity check
-if (!DataTable || !DataTable.versionCheck('3')) {
-    throw 'Warning: KeyTable requires DataTables 3 or newer';
+if (!DataTable || !DataTable.versionCheck('3.1')) {
+    throw 'Warning: KeyTable requires DataTables 3.1 or newer';
 }
 var namespaceCounter = 0;
 var editorNamespaceCounter = 0;
@@ -1154,7 +1154,7 @@ DataTable.ext.selector.cell.push(function (settings, opts, cells) {
 });
 // Attach a listener to the document which listens for DataTables initialisation
 // events so we can automatically initialise
-Dom.s(document).on('preInit.dt.dtk', function (e, settings, json) {
+Dom.on('preInit.dt.dtk', function (e, settings, json) {
     if (e.namespace !== 'dt') {
         return;
     }
