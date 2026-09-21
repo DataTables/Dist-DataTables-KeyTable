@@ -1,14 +1,13 @@
 {
     "name": "datatables.net-keytable",
     "description": "KeyTable for DataTables",
-    "main": "js/dataTables.keyTable.js",
-    "module": "js/dataTables.keyTable.mjs",
+    "main": "./js/dataTables.keyTable.js",
+    "module": "./js/dataTables.keyTable.mjs",
     "types": "./types/types.d.ts",
     "version": "3.0.0",
     "files": [
-        "js/**/*.js",
-        "js/**/*.mjs",
-        "types/**/*.d.ts"
+        "js",
+        "types"
     ],
     "keywords": [
         "KeyTable",
@@ -33,5 +32,16 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/DataTables/KeyTable.git"
-    }
+    },
+    "exports": {
+        ".": {
+            "types": "./types/types.d.ts",
+            "import": "./js/dataTables.keyTable.mjs",
+            "default": "./js/dataTables.keyTable.mjs",
+            "require": "./js/dataTables.keyTable.js"
+        },
+        "./js/*": "./js/*",
+        "./package.json": "./package.json"
+    },
+    "sideEffects": true
 }
