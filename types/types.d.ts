@@ -184,8 +184,13 @@ declare module 'datatables.net' {
     interface Context {
         keytable: KeyTable;
     }
+    interface State {
+        /** Index of the focused cell */
+        keyTable?: CellIdx;
+    }
     interface StateLoad {
-        keyTable: CellIdx;
+        /** Index of the focused cell */
+        keyTable?: CellIdx;
     }
 }
 interface Defaults {
